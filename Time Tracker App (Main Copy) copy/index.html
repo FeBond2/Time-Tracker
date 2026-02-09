@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Time Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div style="flex: 1;"></div>
+                <div style="flex: 1; text-align: center;">
+                    <h1>⏱️ Time Tracker</h1>
+                    <p class="subtitle">Track your work hours with multiple entries per day</p>
+                </div>
+                <div style="flex: 1; display: flex; justify-content: flex-end; gap: 10px; align-items: center;">
+                    <a href="pto.html" class="btn btn-secondary btn-sm" title="Paid Time Off">
+                        🗓️ PTO
+                    </a>
+                    <button id="export-data" class="btn btn-secondary btn-sm" title="Export Data">
+                        💾 Export
+                    </button>
+                    <label for="import-data" class="btn btn-secondary btn-sm" style="cursor: pointer; margin: 0; touch-action: manipulation;" title="Import Data">
+                        📥 Import
+                    </label>
+                    <input type="file" id="import-data" accept=".json" style="display: none; position: absolute; width: 0; height: 0; opacity: 0;">
+                    <button id="dark-mode-toggle" class="btn btn-secondary btn-sm" title="Toggle Dark Mode">
+                        <span id="dark-mode-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="pto-quick-add">
+            <div class="pto-quick-label">Mark day as:</div>
+            <select id="pto-type" class="pto-quick-select" aria-label="PTO type">
+                <option value="vacation">Vacation</option>
+                <option value="sick">Sick</option>
+                <option value="personal">Personal</option>
+            </select>
+            <button id="pto-add" class="btn btn-secondary btn-sm">Save PTO</button>
+        </div>
+
+        <div class="stopwatch-section">
+            <h2>⏱️ Stopwatch</h2>
+            <div class="stopwatch-display">
+                <div class="stopwatch-time" id="stopwatch-display">00:00:00</div>
+                <div class="stopwatch-info" id="stopwatch-info" style="display: none;">
+                    <p>Tracking: <span id="stopwatch-entry-name"></span></p>
+                </div>
+                <div class="stopwatch-buttons">
+                    <button id="start-stopwatch" class="btn btn-success">Start</button>
+                    <button id="pause-stopwatch" class="btn btn-warning" disabled>Pause</button>
+                    <button id="stop-stopwatch" class="btn btn-danger" disabled>Stop</button>
+                    <button id="reset-stopwatch" class="btn btn-secondary" disabled>Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="entry-form">
+            <h2 id="form-title">New Entry</h2>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description (optional):</label>
+                <input type="text" id="description" placeholder="What did you work on?">
+            </div>
+            <div class="form-group">
+                <label>Time Periods:</label>
+                <div id="time-periods-container">
+                    <div class="time-period-item">
+                        <div class="time-period-inputs">
+                            <label>Start:</label>
+                            <input type="time" class="period-start-time" required>
+                            <label>End:</label>
+                            <input type="time" class="period-end-time" required>
+                            <button type="button" class="btn btn-danger btn-sm remove-period" style="display: none;">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-period" class="btn btn-secondary btn-sm">+ Add Another Period</button>
+            </div>
+            <div class="form-actions">
+                <button id="add-entry" class="btn btn-primary">Add Entry</button>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Today's Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="today-total">0h 0m</div>
+                    <div class="stat-label">Total Time Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="today-entries">0</div>
+                    <div class="stat-label">Entries Today</div>
+                </div>
+            </div>
+            <div id="today-entries-list" class="today-entries-list">
+                <!-- Today's entries will be displayed here -->
+            </div>
+        </div>
+
+        <div class="entries-section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h2>All Entries</h2>
+                    <button id="toggle-entries" class="btn btn-secondary btn-sm">Hide</button>
+                </div>
+                <div class="filter-controls">
+                    <button id="filter-past-week" class="btn btn-secondary btn-sm">Past Week</button>
+                    <label for="filter-date">Filter by Date:</label>
+                    <input type="date" id="filter-date">
+                    <button id="clear-filter" class="btn btn-secondary btn-sm">Show All</button>
+                </div>
+            </div>
+            <div id="entries-list-container" style="display: block;">
+                <div id="entries-list" class="entries-list">
+                    <p class="empty-state">No entries yet. Add your first entry above!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
