@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>PTO Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div style="flex: 1;"></div>
+                <div style="flex: 1; text-align: center;">
+                    <h1>🗓️ PTO Tracker</h1>
+                    <p class="subtitle">Track vacation, sick, and personal days</p>
+                </div>
+                <div style="flex: 1; display: flex; justify-content: flex-end; gap: 10px; align-items: center;">
+                    <a href="index.html" class="btn btn-secondary btn-sm" title="Time Tracker">
+                        ⏱️ Time
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="pto-quick-add">
+            <div class="pto-quick-label">Add a day:</div>
+            <input type="date" id="pto-date" class="pto-quick-select" aria-label="PTO date">
+            <select id="pto-type" class="pto-quick-select" aria-label="PTO type">
+                <option value="vacation">Vacation</option>
+                <option value="sick">Sick</option>
+                <option value="personal">Personal</option>
+            </select>
+            <input type="text" id="pto-notes" class="pto-quick-select" placeholder="Notes (optional)">
+            <button id="pto-save" class="btn btn-secondary btn-sm">Save PTO</button>
+        </div>
+
+        <div class="stats-section">
+            <h2>Yearly Totals</h2>
+            <div class="stats-grid" id="pto-stats">
+                <!-- Filled by pto.js -->
+            </div>
+        </div>
+
+        <div class="entries-section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <h2>All PTO Days</h2>
+                </div>
+                <div class="filter-controls">
+                    <label for="pto-year">Year:</label>
+                    <select id="pto-year"></select>
+                </div>
+            </div>
+            <div id="pto-list" class="entries-list">
+                <!-- Filled by pto.js -->
+            </div>
+        </div>
+    </div>
+
+    <script src="pto.js"></script>
+</body>
+</html>
